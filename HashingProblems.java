@@ -33,8 +33,35 @@ class HashingProblems {
 
     public double getAverage(HashMap<Integer, Integer> map, int[] array) {
 
+        /*
+         * ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME AT TOP OF FILE
+         *
+         * Note: if NO values found in common between the HashMap and supplied array,
+         * returning 0.0 is NOT correct, as that is not the average value. Whereas
+         * returning 0.0/0.0 IS correct (which would return a non-number).
+         */
 
-         return 0.0 / 0.0;
+         double sum = 0;
+         int count = 0;
+         
+         // Iterate over array to check each element
+         for (int key : array) {
+            if (map.containsKey(key)) {
+
+                //Add the value to the sum
+                sum += map.get(key);
+
+                //Increment count
+                count++;
+            }
+         }
+
+         //If no keys found, return 0.0 / 0.0
+         if(count == 0) {
+            return 0.0 / 0.0;
+         }
+         
+         return sum / count;
   }
 
 
@@ -55,6 +82,16 @@ class HashingProblems {
        * Hint: Consider iterating over the HashMap using the keySet method.
        */
 
+       // Iterate over the keys of the HashMap using keySet
+       for (Integer key : map.keySet()) {
+        
+        //Check if key is odd
+        if(key % 2 != 0) {
+
+            //Add value to list
+            result.add(map.get(key));
+        }
+       }
 
       return result;
   }
@@ -103,7 +140,31 @@ class HashingProblems {
        * ADD YOUR CODE HERE
        */
 
-      return -1;
+       // Populate the HashSet with elements from the array
+      HashSet<Integer> set = new HashSet<>();
+      int count = 0;
+
+      // Iterate through the array to find pairs with a difference of k
+      for(int num : numbers) {
+        set.add(num);
+      }
+
+      for (int num : numbers){
+        if (set.contains(num - k)) {
+            count++;
+
+        }
+
+        if (set.contains(num + k)) {
+            count++;
+        }
+
+        //Remove the number to prevent double counting pairs
+        set.remove(num);
+
+      }
+
+      return count;
   }
 
 } /* end class HashingProblems */
